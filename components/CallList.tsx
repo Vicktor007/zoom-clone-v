@@ -27,6 +27,8 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
     }
   };
 
+  
+
   const getNoCallsMessage = () => {
     switch (type) {
       case 'ended':
@@ -39,6 +41,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
         return '';
     }
   };
+  
 
   useEffect(() => {
     const fetchRecordings = async () => {
@@ -54,6 +57,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
     };
 
     if (type === 'recordings') {
+      
       fetchRecordings();
     }
   }, [type, callRecordings]);
@@ -68,7 +72,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
       {calls && calls.length > 0 ? (
         calls.map((meeting: Call | CallRecording) => (
           <MeetingCard
-            key={(meeting as Call).id}
+            key={`${(meeting as Call).id}+${type}`}
             icon={
               type === 'ended'
                 ? '/icons/previous.svg'
