@@ -7,7 +7,7 @@ import { sidebarLinks } from '@/constants';
 import { cn } from '@/lib/utils';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { Button } from './ui/button';
-import add from "../public/icons/add-personal.svg";
+import add from "../public/icons/join-meeting.svg";
 import login from "../public/icons/arrow-right.svg";
 
 

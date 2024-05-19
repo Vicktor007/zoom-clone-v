@@ -8,7 +8,7 @@ import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/s
 import { sidebarLinks } from '@/constants';
 import { cn } from '@/lib/utils';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
-import add from "../public/icons/add-personal.svg";
+import add from "../public/icons/join-meeting.svg";
 import login from "../public/icons/arrow-right.svg";
 
 const MobileNav = () => {
