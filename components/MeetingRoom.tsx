@@ -23,7 +23,8 @@ import Loader from './Loader';
 import EndCallButton from './EndCallButton';
 import { cn } from '@/lib/utils';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
-import { CustomCancelCallButton, CustomScreenShareButton, CustomToggleAudioPublishingButton, CustomToggleVideoPublishingButton } from './CustomCallControl';
+import { CustomCallControls } from './CustomCallControl';
+// import { CustomCancelCallButton, CustomScreenShareButton, CustomToggleAudioPublishingButton, CustomToggleVideoPublishingButton } from './CustomCallControl';
 
 type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right';
 
@@ -72,10 +73,11 @@ const MeetingRoom = () => {
         <CallControls onLeave={() => router.push(`/`)} />
         </SignedIn>
         <SignedOut>
-          <CustomCancelCallButton/>
+          <CustomCallControls/>
+          {/* <CustomCancelCallButton/>
           <CustomToggleAudioPublishingButton/>
           <CustomToggleVideoPublishingButton/>
-          <CustomScreenShareButton/>
+          <CustomScreenShareButton/> */}
         </SignedOut>
 
         <DropdownMenu>
