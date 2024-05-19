@@ -91,6 +91,7 @@ const MobileNav = () => {
                           alt="Create account"
                           width={20}
                           height={20}
+                          // className='size-auto'
                         />
                         <p className="font-semibold">Create an Account</p>
               </Link>

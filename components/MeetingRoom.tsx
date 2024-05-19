@@ -22,6 +22,8 @@ import {
 import Loader from './Loader';
 import EndCallButton from './EndCallButton';
 import { cn } from '@/lib/utils';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
+import { CustomCancelCallButton, CustomScreenShareButton, CustomToggleAudioPublishingButton, CustomToggleVideoPublishingButton } from './CustomCallControl';
 
 type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right';
 
@@ -64,8 +66,17 @@ const MeetingRoom = () => {
         </div>
       </div>
       {/* video layout and call controls */}
-      <div className="fixed bottom-0 flex w-full items-center justify-center gap-5">
+      <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap">
+        <SignedIn>
+
         <CallControls onLeave={() => router.push(`/`)} />
+        </SignedIn>
+        <SignedOut>
+          <CustomCancelCallButton/>
+          <CustomToggleAudioPublishingButton/>
+          <CustomToggleVideoPublishingButton/>
+          <CustomScreenShareButton/>
+        </SignedOut>
 
         <DropdownMenu>
           <div className="flex items-center">

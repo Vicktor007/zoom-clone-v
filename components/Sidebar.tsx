@@ -57,7 +57,7 @@ const Sidebar = () => {
                 width={24}
                 height={24}
               />
-              <p className="text-lg font-semibold max-lg:hidden">
+              <p className=" text-sm font-semibold max-lg:hidden">
                 Login
               </p>
               </Link>
@@ -73,7 +73,7 @@ const Sidebar = () => {
                 width={24}
                 height={24}
               />
-              <p className="text-lg font-semibold max-lg:hidden">
+              <p className="text-sm font-semibold max-lg:hidden">
                 Create an Account
               </p>
               </Link>
