@@ -48,6 +48,9 @@ const Sidebar = () => {
                 'flex gap-4 items-center p-4 rounded-lg justify-start'
               )}>
               <Link href="/sign-in">Login</Link>
+              <Link href="/sign-up">
+                Create Account
+              </Link>
             </Button>
           </SignedOut>
       </div>
