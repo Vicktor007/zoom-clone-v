@@ -7,6 +7,9 @@ import { usePathname } from 'next/navigation';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { sidebarLinks } from '@/constants';
 import { cn } from '@/lib/utils';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
+import add from "../public/icons/add-personal.svg";
+import login from "../public/icons/arrow-right.svg";
 
 const MobileNav = () => {
   const pathname = usePathname();
@@ -36,6 +39,7 @@ const MobileNav = () => {
           <div className="flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto">
             <SheetClose asChild>
               <section className=" flex h-full flex-col gap-6 pt-16 text-white">
+                <SignedIn>
                 {sidebarLinks.map((item) => {
                   const isActive = pathname === item.route;
 
@@ -62,6 +66,35 @@ const MobileNav = () => {
                     </SheetClose>
                   );
                 })}
+                </SignedIn>
+                <SignedOut>
+                <Link 
+                    className={cn(
+                      'flex gap-4 items-center p-4 rounded-lg w-full max-w-60'
+                    )}
+                href="/sign-in">
+                  <Image
+                          src={login}
+                          alt="sign in"
+                          width={20}
+                          height={20}
+                        />
+                        <p className="font-semibold">Login</p>
+              </Link>
+              <Link 
+                 className={cn(
+                  'flex gap-4 items-center p-4 rounded-lg w-full max-w-60'
+                )}
+              href="/sign-up">
+                <Image
+                          src={add}
+                          alt="Create account"
+                          width={20}
+                          height={20}
+                        />
+                        <p className="font-semibold">Create an Account</p>
+              </Link>
+              </SignedOut>
               </section>
             </SheetClose>
           </div>

@@ -7,6 +7,9 @@ import { sidebarLinks } from '@/constants';
 import { cn } from '@/lib/utils';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { Button } from './ui/button';
+import add from "../public/icons/add-personal.svg";
+import login from "../public/icons/arrow-right.svg";
+
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -47,9 +50,32 @@ const Sidebar = () => {
             <Button asChild className={cn(
                 'flex gap-4 items-center p-4 rounded-lg justify-start'
               )}>
-              <Link href="/sign-in">Login</Link>
+              <Link href="/sign-in">
+              <Image
+                src={login}
+                alt="login"
+                width={24}
+                height={24}
+              />
+              <p className="text-lg font-semibold max-lg:hidden">
+                Login
+              </p>
+              </Link>
+            </Button>
+            <Button asChild className={cn(
+                'flex gap-4 items-center p-4 rounded-lg justify-start'
+              )}>
+             
               <Link href="/sign-up">
-                Create Account
+              <Image
+                src={add}
+                alt="create an account"
+                width={24}
+                height={24}
+              />
+              <p className="text-lg font-semibold max-lg:hidden">
+                Create an Account
+              </p>
               </Link>
             </Button>
           </SignedOut>
