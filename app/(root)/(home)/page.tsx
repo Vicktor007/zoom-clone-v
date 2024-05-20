@@ -65,10 +65,15 @@ const Home = () => {
       clearInterval(timer);
     };
   }, []);
-  const nextMeeting = upcomingCalls?.sort((a, b) => new Date(a?.state?.startsAt).getTime() - new Date(b?.state?.startsAt).getTime())[0];
+  // const nextMeeting = upcomingCalls?.sort((a, b) => new Date(a?.state?.startsAt).getTime() - new Date(b?.state?.startsAt).getTime())[0];
+  const nextMeeting = upcomingCalls?.sort((a, b) => {
+    const aTime = a?.state?.startsAt ? new Date(a.state.startsAt).getTime() : 0;
+    const bTime = b?.state?.startsAt ? new Date(b.state.startsAt).getTime() : 0;
+    return aTime - bTime;
+  })[0];
 
   // const nextMeeting = upcomingCalls?.sort((a, b) => a?.state?.startsAt - b?.state?.startsAt)[0];
-  const nextMeetingTime = nextMeeting?.state?.startsAt.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  const nextMeetingTime = nextMeeting?.state?.startsAt?.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
   const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full' })).format(now);
