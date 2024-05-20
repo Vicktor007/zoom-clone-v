@@ -9,7 +9,7 @@ import {
   SpeakerLayout,
   useCallStateHooks,
 } from '@stream-io/video-react-sdk';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { Users, LayoutList } from 'lucide-react';
 
 import {
@@ -22,7 +22,6 @@ import {
 import Loader from './Loader';
 import EndCallButton from './EndCallButton';
 import { cn } from '@/lib/utils';
-import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { CustomCallControls } from './CustomCallControl';
 // import { CustomCancelCallButton, CustomScreenShareButton, CustomToggleAudioPublishingButton, CustomToggleVideoPublishingButton } from './CustomCallControl';
 
@@ -31,7 +30,6 @@ type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right';
 const MeetingRoom = () => {
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get('personal');
-  const router = useRouter();
   const [layout, setLayout] = useState<CallLayoutType>('speaker-left');
   const [showParticipants, setShowParticipants] = useState(false);
   const { useCallCallingState } = useCallStateHooks();
@@ -68,18 +66,9 @@ const MeetingRoom = () => {
       </div>
       {/* video layout and call controls */}
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap">
-        <SignedIn>
-
-        <CallControls onLeave={() => router.push(`/`)} />
-        </SignedIn>
-        <SignedOut>
+        
           <CustomCallControls/>
-          {/* <CustomCancelCallButton/>
-          <CustomToggleAudioPublishingButton/>
-          <CustomToggleVideoPublishingButton/>
-          <CustomScreenShareButton/> */}
-        </SignedOut>
-
+          
         <DropdownMenu>
           <div className="flex items-center">
             <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]  ">
