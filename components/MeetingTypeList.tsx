@@ -8,17 +8,20 @@ import HomeCard from './HomeCard';
 import MeetingModal from './MeetingModal';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser, SignedIn, SignedOut } from '@clerk/nextjs';
-// import Loader from './Loader';
 import { Textarea } from './ui/textarea';
 import ReactDatePicker from 'react-datepicker';
 import { useToast } from './ui/use-toast';
 import { Input } from './ui/input';
 
+
 const initialValues = {
   dateTime: new Date(),
   description: '',
   link: '',
+  meetingType: 'public', // default to public
+  allowedEmails: '', // emails of those to be allowed in the call
 };
+
 
 const MeetingTypeList = () => {
   const router = useRouter();
@@ -30,6 +33,7 @@ const MeetingTypeList = () => {
   const client = useStreamVideoClient();
   const { user } = useUser();
   const { toast } = useToast();
+
 
   const createMeeting = async () => {
     if (!client || !user) return;
@@ -49,6 +53,9 @@ const MeetingTypeList = () => {
           starts_at: startsAt,
           custom: {
             description,
+            callType: values.meetingType, // include meeting type
+            allowedEmails: values.meetingType === 'private' ? [user?.primaryEmailAddress?.emailAddress, ...values.allowedEmails.split(',')] : [], // include creator's email and allowed emails if meeting type is private
+            creatorId: user.id
           },
         },
       });
@@ -64,8 +71,8 @@ const MeetingTypeList = () => {
       toast({ title: 'Failed to create Meeting' });
     }
   };
+  
 
-  // if (!client || !user ) return <Loader />;
 
   const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
 
@@ -135,6 +142,33 @@ const MeetingTypeList = () => {
               className="w-full rounded bg-dark-3 p-2 focus:outline-none"
             />
           </div>
+          <div className="flex w-full flex-col gap-2.5">
+    <label className="text-base font-normal leading-[22.4px] text-sky-2">
+      Select Meeting Type
+    </label>
+    <select aria-label="Meeting Type"
+      onChange={(e) =>
+        setValues({ ...values, meetingType: e.target.value })
+      }
+      className="w-full rounded bg-dark-3 p-2 focus:outline-none"
+    >
+      <option value="public">Public</option>
+      <option value="private">Private</option>
+    </select>
+  </div>
+  {values.meetingType === 'private' && (
+    <div className="flex w-full flex-col gap-2.5">
+      <label className="text-base font-normal leading-[22.4px] text-sky-2">
+        Enter Allowed Emails (comma separated)
+      </label>
+      <Textarea
+        className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+        onChange={(e) =>
+          setValues({ ...values, allowedEmails: e.target.value })
+        }
+      />
+    </div>
+  )}
         </MeetingModal>
       ) : (
         <MeetingModal
