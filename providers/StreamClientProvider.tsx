@@ -60,7 +60,7 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
       user: {
         id: user?.id || 'guest',
         name: user?.username || 'Guest User',
-        image: user?.imageUrl || "https://th.bing.com/th/id/R.7123e3ecbbc960764e9f3748c85a24da?rik=Bug7jHIMuASTwA&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_568657.png&ehk=vR2Oy8lOQ6lK5CZWu%2fxQLe1STk4J4gttUCfuOHGGbzA%3d&risl=&pid=ImgRaw&r=0",
+        image: user?.imageUrl || "",
       },
       tokenProvider,
     });
